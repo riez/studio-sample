@@ -1,10 +1,11 @@
 export interface FilmModel {
     id: string;
-    name: string;
+    title: string;
     description: string;
     vehicle_class: string;
     length: string;
-    pilot: string;
+    producer: string;
+    release_date: string;
     films: Array<string>;
     url: string;
 }

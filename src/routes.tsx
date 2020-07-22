@@ -1,12 +1,11 @@
 import route from 'next-routes';
+import { isSSR } from './utils';
 
 interface RouteType {
   name: string;
   page: string;
   pattern: string;
 }
-
-const isClient = typeof window !== 'undefined';
 
 export const routes: RouteType[] = [
   { name: 'home', page: 'index', pattern: '/' },
@@ -21,7 +20,7 @@ routes.forEach((item: RouteType) => {
 export const Link = nextRoutes.Link;
 export const Router = nextRoutes.Router;
 export const getRouter = (): typeof Router => {
-  if (isClient) {
+  if (!isSSR) {
     return Router;
   }
   return null;

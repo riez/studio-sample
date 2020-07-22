@@ -1,10 +1,19 @@
-import Document from 'next/document';
+import 'semantic-ui-css/semantic.min.css';
 import React from 'react';
-import App from 'next/app';
+import App, { AppContext } from 'next/app';
+import styled from 'styled-components';
+import { Segment, Dimmer, Loader, Image } from 'semantic-ui-react';
+
+const StyledSegment = styled(Segment)`
+    height: 100vh;
+`;
+
 const renderLoadingPage = (): any => (
-    <div>
-        Loading...
-    </div>
+    <StyledSegment >
+      <Dimmer active inverted>
+        <Loader size='large'>Loading</Loader>
+      </Dimmer>
+    </StyledSegment>
 )
 const renderErrorPage = (): any => (
     <div>
@@ -12,23 +21,21 @@ const renderErrorPage = (): any => (
     </div>
 )
 class Root extends App {
-    static async getInitialProps(ctx) {
+    static async getInitialProps(ctx: AppContext) {
         const appProps = await App.getInitialProps(ctx);
         return {...appProps, query: ctx.ctx.query || {}}
-      }
+    }
     
   render(): React.ReactElement {
-    const { Component, pageProps } = this.props;
-    return (
-        <React.Fragment>
-              <Component
+        const { Component, pageProps } = this.props;
+        return (
+            <Component
                 {...pageProps}
                 renderErrorPage={renderErrorPage}
                 renderLoadingPage={renderLoadingPage}
-              />
-        </React.Fragment>
-    );
-  }
+            />
+        );
+    }
 }
 
 export default Root;
