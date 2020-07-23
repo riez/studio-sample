@@ -8,8 +8,8 @@ export const getWidth = () => {
 
 export const generateBase64InitialImage = (name: string) => {
     let initials = '';
-    const firstInitial = name.split(' ')[0];
-    const lastInitial = name.split(' ').reduceRight((a: string) => a);
+    const firstInitial = name?.split(' ')[0] || 'A';
+    const lastInitial = name?.split(' ').reduceRight((a: string) => a) || 'Z';
     if (firstInitial === lastInitial) {
         initials = lastInitial.trim().substring(0, 2).toUpperCase();
     }

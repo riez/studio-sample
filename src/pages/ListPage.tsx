@@ -1,6 +1,6 @@
 import useSwr from 'swr';
 import { useCallback, useState } from 'react';
-import { getRouter, Router } from '../routes';
+import { getRouter, Router, Link } from '../routes';
 import { NextPage } from 'next';
 import { Container, List, Image, Grid, Button, Icon, Input, Select } from 'semantic-ui-react';
 import styled from 'styled-components';
@@ -100,13 +100,15 @@ const ListPage: NextPage<PageProps> = ({
         </Grid>
         <List divided selection verticalAlign='middle'>
           {preparedData.map((item: FilmModel) => 
-            <List.Item key={item?.id}>
-              <Image src={generateBase64InitialImage(item?.title)} size="small"/>
-              <List.Content>
-                <List.Header>{item?.title} ({item?.release_date})</List.Header>
-                {item?.producer}
-              </List.Content>
-            </List.Item>
+            <Link key={item?.id} route={`/films/${item?.id}`}>
+              <List.Item>
+                <Image src={generateBase64InitialImage(item?.title)} size="small"/>
+                <List.Content>
+                  <List.Header>{item?.title} ({item?.release_date})</List.Header>
+                  {item?.producer}
+                </List.Content>
+              </List.Item>
+            </Link>
           )}
         </List>
       </StyledContainer>

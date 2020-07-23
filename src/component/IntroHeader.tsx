@@ -31,23 +31,27 @@ const TitleText = styled(Grid.Row)`
     color: white;
 `;
 
+const StyledImage = styled(Image)`
+    margin: 0 auto;
+`;
+
 const IntroHeader: FunctionComponent<Props> = ({
     dataFilm
 }) => {
     return (
         <Container>
-            <Grid columns={2} stackable>
+            <Grid columns={2} stackable centered>
                 <Grid.Column verticalAlign="middle">
                     <StyledContainer>
                         <TitleText>{dataFilm?.title}</TitleText>
                         <RatingContainer>
-                            <Rating icon='star' defaultRating={3} maxRating={5} />
+                            <Rating icon='star' defaultRating={Number(dataFilm?.rt_score)/100*5} maxRating={5} />
                         </RatingContainer>
                     </StyledContainer>
                 </Grid.Column>
                 <Grid.Column>
                     <StyledContainer>
-                        <Image src={generateBase64InitialImage(dataFilm?.title)} size="small"/>
+                        <StyledImage src={generateBase64InitialImage(dataFilm?.title)} size="small"/>
                     </StyledContainer>
                 </Grid.Column>
             </Grid>

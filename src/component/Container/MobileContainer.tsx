@@ -1,5 +1,7 @@
 import { FunctionComponent, useState, useCallback } from "react";
 import { Responsive, Sidebar, Menu, Segment, Container, Icon, Button } from "semantic-ui-react";
+import styled from 'styled-components';
+
 import { getWidth } from "../../utils";
 import IntroHeader from "../IntroHeader";
 import { Link } from "../../routes";
@@ -10,6 +12,11 @@ interface Props{
     dataFilm: FilmModel;
     hideIntroHeader?: boolean;
 }
+
+const StyledSegment = styled(Segment)`
+    ${props => props.hideintroheader === 'true' && "min-height: 350px"}
+    padding: 1em 0em;
+`;
 
 const MobileContainer: FunctionComponent<Props> = ({
     children,
@@ -48,10 +55,9 @@ const MobileContainer: FunctionComponent<Props> = ({
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
-          <Segment
+          <StyledSegment
             inverted
             textAlign='center'
-            style={{ minHeight: 300, padding: '1em 0em' }}
             vertical
           >
             <Container>
@@ -65,7 +71,7 @@ const MobileContainer: FunctionComponent<Props> = ({
               </Menu>
             </Container>
             {!hideIntroHeader && <IntroHeader dataFilm={dataFilm} />}
-          </Segment>
+          </StyledSegment>
 
           {children}
         </Sidebar.Pusher>
