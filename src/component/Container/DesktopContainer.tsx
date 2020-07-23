@@ -3,9 +3,13 @@ import { Responsive, Visibility, Segment, Menu, Button, Container, Image } from 
 import { getWidth } from "../../utils";
 import styled from 'styled-components';
 import IntroHeader from "../IntroHeader";
+import { Link } from "../../routes";
+import { FilmModel } from "../../models/film";
 
 interface Props{
     children: React.ReactNode;
+    dataFilm: FilmModel;
+    hideIntroHeader?: boolean;
 }
 
 const Logo = styled(Image)`
@@ -17,12 +21,14 @@ const MenuItem = styled(Menu.Item)`
 `;
 
 const StyledSegment = styled(Segment)`
-    min-height: 400px;
+    ${props => props.hideintroheader === 'true' && "min-height: 400px"}
     padding: 1em 0em;
 `;
 
 const DesktopContainer: FunctionComponent<Props> = ({
-    children
+    children,
+    dataFilm,
+    hideIntroHeader
 }) => {
     const [fixed, changeFixed] = useState(false);
     const handleFixed = useCallback((value: boolean) => {
@@ -39,6 +45,7 @@ const DesktopContainer: FunctionComponent<Props> = ({
                     inverted
                     textAlign='center'
                     vertical
+                    hideintroheader={hideIntroHeader?.toString()}
                 >
                     <Menu
                         fixed={fixed ? 'top' : null}
@@ -48,15 +55,19 @@ const DesktopContainer: FunctionComponent<Props> = ({
                         size='large'
                     >
                         <Container>
-                            <MenuItem className="item" as='a'>
-                                Studio Sample
-                            </MenuItem>
-                            <MenuItem className="item" position='right'>
-                                Hello
-                            </MenuItem>
+                            <Link route="/">
+                                <MenuItem className="item" as='a'>
+                                    Studio Sample
+                                </MenuItem>
+                            </Link>
+                            <Link route="/lists">
+                                <MenuItem className="item" position='right'>
+                                    All Films
+                                </MenuItem>
+                            </Link>
                         </Container>
                     </Menu>
-                    <IntroHeader />
+                    {!hideIntroHeader && <IntroHeader dataFilm={dataFilm} />}
                 </StyledSegment>
                 </Visibility>
                 {children}

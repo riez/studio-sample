@@ -2,13 +2,19 @@ import { FunctionComponent, useState, useCallback } from "react";
 import { Responsive, Sidebar, Menu, Segment, Container, Icon, Button } from "semantic-ui-react";
 import { getWidth } from "../../utils";
 import IntroHeader from "../IntroHeader";
+import { Link } from "../../routes";
+import { FilmModel } from "../../models/film";
 
 interface Props{
     children: React.ReactNode;
+    dataFilm: FilmModel;
+    hideIntroHeader?: boolean;
 }
 
 const MobileContainer: FunctionComponent<Props> = ({
-    children
+    children,
+    dataFilm,
+    hideIntroHeader
 }) => {
     const [sidebarOpened, setSidebarOpened] = useState(false);
     const handleSidebarHide = useCallback(() => {
@@ -31,14 +37,14 @@ const MobileContainer: FunctionComponent<Props> = ({
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item as='a' active>
-            Home
-          </Menu.Item>
-          <Menu.Item as='a'>Work</Menu.Item>
-          <Menu.Item as='a'>Company</Menu.Item>
-          <Menu.Item as='a'>Careers</Menu.Item>
-          <Menu.Item as='a'>Log in</Menu.Item>
-          <Menu.Item as='a'>Sign Up</Menu.Item>
+          <Link route="/">
+            <Menu.Item as='a' active>
+              Home
+            </Menu.Item>
+          </Link>
+          <Link route="/lists">
+            <Menu.Item as='a'>All Films</Menu.Item>
+          </Link>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -58,7 +64,7 @@ const MobileContainer: FunctionComponent<Props> = ({
                 </Menu.Item>
               </Menu>
             </Container>
-            <IntroHeader />
+            {!hideIntroHeader && <IntroHeader dataFilm={dataFilm} />}
           </Segment>
 
           {children}

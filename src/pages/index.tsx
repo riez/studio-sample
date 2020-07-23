@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
 import useSwr from 'swr';
-import { Button, GridRow, Grid, Segment, Header, Card, Popup, Image, Icon, Container} from 'semantic-ui-react'
+import { Grid, Segment, Header, Card, Popup, Image, Icon, Container} from 'semantic-ui-react'
 import Page from '../component/Page';
 import styled from 'styled-components';
 import { generateBase64InitialImage } from '../utils';
 import { PeopleModel } from '../models/people';
 import { FilmModel } from '../models/film';
+import { Link } from '../routes';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -26,9 +27,8 @@ const Homepage: FunctionComponent<PageProps> = ({
   if(!dataFilms || !dataActors){
     return renderLoadingPage();
   }
-  console.log(dataFilms)
   return (
-    <Page>
+    <Page hideIntroHeader>
       <Container>
         <StyledSegment>
           <Header as='h2' textAlign='left'>
@@ -39,35 +39,36 @@ const Homepage: FunctionComponent<PageProps> = ({
           </Header>
           <Grid columns={4} doubling stackable>
           {dataFilms.map((item: FilmModel) => 
-            <Grid.Column key={item?.id}>
-            <Card>
-              <Image src={generateBase64InitialImage(item?.title || '')} wrapped ui={false} />
-              <Card.Content>
-                <Card.Header>{item?.title}</Card.Header>
-                <Card.Meta>
-                  <div>
-                    <Icon name='user' />
-                    <span>{item?.producer}</span>
-                  </div>
-                  <div>
-                    <Icon name='calendar' />
-                    <span>{item?.release_date}</span>
-                  </div>
-                </Card.Meta>
-                <Card.Description>
-                  {item?.description?.substr(0, 150)}
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <a>
-                  <Icon name='user' />
-                  Read More
-                </a>
-              </Card.Content>
-            </Card>
+            <Grid.Column key={item?.id} >
+              <Card>
+                <Image src={generateBase64InitialImage(item?.title || '')} wrapped ui={false} />
+                <Card.Content>
+                  <Card.Header>{item?.title}</Card.Header>
+                  <Card.Meta>
+                    <div>
+                      <Icon name='user' />
+                      <span>{item?.producer}</span>
+                    </div>
+                    <div>
+                      <Icon name='calendar' />
+                      <span>{item?.release_date}</span>
+                    </div>
+                  </Card.Meta>
+                  <Card.Description>
+                    {item?.description?.substr(0, 150)}
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra textAlign="right">
+                  <Link route={`/films/${item?.id}`}>
+                    <a>
+                      Read More
+                      <Icon name='arrow right' />
+                    </a>
+                  </Link>
+                </Card.Content>
+              </Card>
             </Grid.Column>
           )}
-          
           </Grid>
         </StyledSegment>
       </Container>
@@ -93,48 +94,6 @@ const Homepage: FunctionComponent<PageProps> = ({
             )}
           </Grid>
         </StyledSegment>
-      </Container>
-      <Container>
-      <StyledSegment>
-        <Header as='h2' textAlign='left'>
-          <Header.Content>
-            Actors
-            <Header.Subheader>Your favourite actors is here</Header.Subheader>
-          </Header.Content>
-        </Header>
-        <Grid columns={5} doubling stackable>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>Content</Segment>
-          </Grid.Column>
-        </Grid>
-      </StyledSegment>
       </Container>
     </Page>
   )

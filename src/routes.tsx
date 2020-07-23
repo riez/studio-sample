@@ -9,7 +9,8 @@ interface RouteType {
 
 export const routes: RouteType[] = [
   { name: 'home', page: 'index', pattern: '/' },
-  { name: 'filter', page: 'Filter', pattern: '/filter/:id' },
+  { name: 'detail-films', page: 'DetailPage', pattern: '/films/:id' },
+  { name: 'list-films', page: 'ListPage', pattern: '/lists' },
 ];
 
 const nextRoutes = new route();

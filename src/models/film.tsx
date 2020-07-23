@@ -5,7 +5,9 @@ export interface FilmModel {
     vehicle_class: string;
     length: string;
     producer: string;
+    director: string;
     release_date: string;
+    rt_score: string;
     films: Array<string>;
     url: string;
 }

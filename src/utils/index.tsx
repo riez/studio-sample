@@ -35,3 +35,12 @@ export const generateBase64InitialImage = (name: string) => {
     context.fillText(initials, canvas.width/2, canvas.height/2);
     return canvas.toDataURL();
 }
+
+export const serialize = (obj) => {
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&");
+  }
