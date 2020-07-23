@@ -7,7 +7,8 @@
     "build:server": "webpack",
     "build": "next build && npm run build:server",
     "start": "NODE_ENV=production node dist/index.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
@@ -16,6 +17,7 @@
     "next-routes": "^1.4.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-helmet": "^6.1.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.0.0",
     "styled-components": "^5.1.1",
@@ -25,9 +27,12 @@
   "devDependencies": {
     "@types/node": "^14.0.24",
     "@types/react": "^16.9.43",
+    "@types/react-helmet": "^6.0.0",
     "@types/styled-components": "^5.1.1",
     "@types/superagent": "^4.1.8",
     "babel-plugin-styled-components": "^1.10.7",
+    "canvas": "^2.6.1",
+    "jest": "^26.1.0",
     "ts-loader": "^8.0.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",

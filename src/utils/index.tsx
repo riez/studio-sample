@@ -6,17 +6,20 @@ export const getWidth = () => {
     return isSSR ? Number(Responsive.onlyTablet.minWidth) : Number(window.innerWidth)
 }
 
-export const generateBase64InitialImage = (name: string) => {
-    let initials = '';
-    const firstInitial = name?.split(' ')[0] || 'A';
-    const lastInitial = name?.split(' ').reduceRight((a: string) => a) || 'Z';
+export const generateIntials = (params: string) => {
+    const firstInitial = params?.split(' ')[0] || 'A';
+    const lastInitial = params?.split(' ').reduceRight((a: string) => a) || 'Z';
     if (firstInitial === lastInitial) {
-        initials = lastInitial.trim().substring(0, 2).toUpperCase();
+        return lastInitial.trim().substring(0, 2).toUpperCase();
     }
-    initials = [firstInitial, lastInitial]
+    return [firstInitial, lastInitial]
         .map((initial) => initial[0])
         .join('')
         .toUpperCase();
+}
+
+export const generateBase64InitialImage = (name: string) => {
+    const initials = generateIntials(name);    
     const randomColor = `hsl(${360 * Math.random()},${(25 + 70 * Math.random())}%,${(85 + 10 * Math.random())}%)`;
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");

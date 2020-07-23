@@ -42,7 +42,7 @@ const DetailPage: NextPage<PageProps> = ({
     return renderLoadingPage();
   }
   return (
-    <Page dataFilm={data}>
+    <Page metaTitle={`Studio Sample - ${data?.title}`} metaDescription={data?.description?.substr(0, 140)} dataFilm={data}>
       <StyledContainer>
         {/* TODO: Get from GlobalState Routing History */}
         <Segment>

@@ -67,7 +67,7 @@ const ListPage: NextPage<PageProps> = ({
     return renderLoadingPage();
   }
   return (
-    <Page hideIntroHeader>
+    <Page metaTitle={'Films List'} metaDescription={'List of Video available on our website. Contains various species and location. Eg. Mountains, humans...'} hideIntroHeader>
       <StyledContainer>
         <Grid stretched>
           <SearchInput onSearch={handleSearch}/>
