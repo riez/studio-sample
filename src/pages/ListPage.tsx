@@ -105,7 +105,7 @@ const ListPage: NextPage<PageProps> = ({
                 <Image src={generateBase64InitialImage(item?.title)} size="small"/>
                 <List.Content>
                   <List.Header>{item?.title} ({item?.release_date})</List.Header>
-                  {item?.producer}
+                  Rating: <strong>{(Number(item?.rt_score)/100*5)?.toFixed(2) || 0} of 5</strong> - Producer: <strong>{item?.producer}</strong>
                 </List.Content>
               </List.Item>
             </Link>
