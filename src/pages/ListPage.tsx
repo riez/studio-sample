@@ -31,7 +31,7 @@ const ListPage: NextPage<PageProps> = ({
     const direction = router?.query?.direction;
     if(sort && direction === 'asc'){
       return data?.sort((a: FilmModel, b: FilmModel) => {
-        if (a[sort.toString()] < b[sort.toString()]){
+        if (Number(a[sort.toString()]) < Number(b[sort.toString()])){
           return -1;
         }
         return 1;
@@ -39,7 +39,7 @@ const ListPage: NextPage<PageProps> = ({
     }
     if(sort && direction === 'desc'){
       return data?.sort((a: FilmModel, b: FilmModel) => {
-        if (a[sort.toString()] < b[sort.toString()]){
+        if (Number(a[sort.toString()]) < Number(b[sort.toString()])){
           return 1;
         }
         return -1;
