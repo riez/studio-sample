@@ -3,6 +3,7 @@ import { Responsive, Visibility, Segment, Menu, Button, Container, Image } from 
 import { getWidth } from "../../utils";
 import styled from 'styled-components';
 import IntroHeader from "../IntroHeader";
+import Footer from "../Footer";
 import { Link } from "../../routes";
 import { FilmModel } from "../../models/film";
 
@@ -71,6 +72,7 @@ const DesktopContainer: FunctionComponent<Props> = ({
                 </StyledSegment>
                 </Visibility>
                 {children}
+                <Footer />
         </Responsive>
     )
 }

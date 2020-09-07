@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { getWidth } from "../../utils";
 import IntroHeader from "../IntroHeader";
+import Footer from "../Footer";
 import { Link } from "../../routes";
 import { FilmModel } from "../../models/film";
 
@@ -72,8 +73,8 @@ const MobileContainer: FunctionComponent<Props> = ({
             </Container>
             {!hideIntroHeader && <IntroHeader dataFilm={dataFilm} />}
           </StyledSegment>
-
           {children}
+          <Footer />
         </Sidebar.Pusher>
       </Responsive>
     )
